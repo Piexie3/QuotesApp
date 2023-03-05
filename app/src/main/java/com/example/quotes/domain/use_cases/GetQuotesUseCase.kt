@@ -1,8 +1,8 @@
 package com.example.quotes.domain.use_cases
 
 import com.example.quotes.core.utils.Resource
-import com.example.quotes.data.dto.toQuote
-import com.example.quotes.domain.models.Quote
+import com.example.quotes.data.dto.toQuotes
+import com.example.quotes.domain.models.Quotes
 import com.example.quotes.domain.repository.QuotesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -14,10 +14,10 @@ class GetQuotesUseCase @Inject constructor(
     private val repository: QuotesRepository
 ) {
 
-    operator fun invoke(): Flow<Resource<List<Quote>>> = flow{
+    operator fun invoke(): Flow<Resource<List<Quotes>>> = flow{
         try{
             emit(Resource.Loading())
-            val quotes = repository.getQuotes().map { it.toQuote() }
+            val quotes = repository.getQuotes().toQuotes()
             emit(Resource.Success(quotes))
         }catch(e: HttpException){
             emit(Resource.Error(e.localizedMessage?: "An  unexpected Error occurred!"))

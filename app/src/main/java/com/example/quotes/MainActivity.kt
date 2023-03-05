@@ -3,14 +3,10 @@ package com.example.quotes
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.quotes.presentation.home.HomeScreen
 import com.example.quotes.presentation.home.HomeViewModel
 import com.example.quotes.ui.theme.QuotesTheme
@@ -22,9 +18,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             QuotesTheme {
-                val viewModel by viewModels<HomeViewModel>()
-                // A surface container using the 'background' color from the theme
+                val viewModel : HomeViewModel = hiltViewModel()
+                Surface(
+                   modifier = Modifier.fillMaxSize()
+                ) {
                     HomeScreen(viewModel)
+                }
             }
         }
     }

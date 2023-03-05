@@ -17,7 +17,6 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getQuotesUseCase: GetQuotesUseCase
 ) : ViewModel() {
-    private val teg = "HomeViewModel"
 
     private val _quoteState = mutableStateOf(QuoteState())
     val quoteState: State<QuoteState> = _quoteState
@@ -42,8 +41,7 @@ class HomeViewModel @Inject constructor(
                     _quoteState.value= QuoteState(isLoading = true)
                 }
             }
-            Log.d(teg , "getQuotes")
-
         }.launchIn(viewModelScope)
     }
+
 }

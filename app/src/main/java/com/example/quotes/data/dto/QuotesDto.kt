@@ -1,6 +1,5 @@
 package com.example.quotes.data.dto
-
-import com.example.quotes.domain.models.Quote
+import com.example.quotes.domain.models.Quotes
 
 data class QuotesDto(
     val count: Int,
@@ -11,8 +10,18 @@ data class QuotesDto(
     val totalPages: Int
 )
 
-fun QuotesDto.toQuote(): Quote{
-return Quote(
-    count,lastItemIndex, page, results, totalCount, totalPages
-)
+fun QuotesDto.toQuotes(): List<Quotes>{
+   return results.map { result->
+       Quotes(
+           _id = result._id,
+           author = result.author,
+           authorSlug = result.authorSlug,
+           content = result.content,
+           dateAdded = result.dateAdded,
+           dateModified = result.dateModified,
+           length = result.length,
+           tags = result.tags
+       )
+   }
 }
+

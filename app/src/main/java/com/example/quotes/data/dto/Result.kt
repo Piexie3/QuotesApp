@@ -1,5 +1,6 @@
 package com.example.quotes.data.dto
 
+
 data class Result(
     val _id: String,
     val author: String,
