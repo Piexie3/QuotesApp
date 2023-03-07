@@ -27,7 +27,7 @@ fun HomeScreen(
 ) {
     Scaffold(
         topBar = {
-            TopApp()
+            TopApp(viewModel)
         }
     ) { paddingValues ->
         val state = viewModel.quoteState.value
@@ -65,7 +65,9 @@ fun HomeScreen(
 
 
 @Composable
-fun TopApp() {
+fun TopApp(
+    viewModel: HomeViewModel
+) {
     Row(
         modifier = Modifier
             .padding(8.dp)
@@ -78,10 +80,10 @@ fun TopApp() {
                 .clip(RoundedCornerShape(100))
                 .fillMaxWidth(.80F),
             onSearchParamChange = {
-                // TODO("Update value in viewModel")
+                viewModel.searchParam.value
             },
             onSearchClick = {
-                // TODO("Perform search event")
+                viewModel.searchState.value
             }
         )
         IconButton(
